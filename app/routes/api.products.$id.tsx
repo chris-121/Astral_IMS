@@ -23,9 +23,11 @@ export let action: ActionFunction = async ({ request, params }) => {
   }
 
   if (request.method === 'PUT' && id) {
-    if (!name || !quantity || quantity < 0) {
+    if (!name) return json({ message: 'Name is required' }, { status: 400 });
+
+    if (!quantity || quantity < 0) {
       return json(
-        { message: 'Name and quantity are required' },
+        { message: 'Quantity should be greater than zero' },
         { status: 400 }
       );
     }
